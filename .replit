@@ -17,3 +17,21 @@ publicDir = "dist"
 [[ports]]
 localPort = 5173
 externalPort = 80
+
+[[ports]]
+localPort = 5174
+externalPort = 3000
+
+[agent]
+expertMode = true
+
+[workflows]
+
+[[workflows.workflow]]
+name = "npm"
+mode = "sequential"
+author = 3387024
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm install -D postcss autoprefixer"
