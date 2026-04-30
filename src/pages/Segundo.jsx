@@ -4,55 +4,38 @@
 
 */
 
-import { useState } from "react";
+//Cambiar modo oscuro a modo clar 
+import { useState } from 'react';
 
-const Segundo = () => {
-  const [counter, setCounter] = useState(0);
+function ThemeToggle() {
+  
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const handleReset = () => {
-    setCounter(0);
+ 
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  
+  const styles = {
+    backgroundColor: isDarkMode ? '#282c34' : '#ffffff',
+    color: isDarkMode ? '#ffffff' : '#000000',
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'all 0.3s ease'
   };
 
   return (
-    <>
-      <h1 className="font-bold text-2xl">useState</h1>
-
-      <hr className="border-gray-400 mb-8" />
-
-      <ul className="list-disc pl-5">
-        <li>
-        Esta es una prueba para comprobar los cambios en github
-        </li>
-      </ul>
-
-      <div className="text-center mb-8">
-        <h2 className="mt-4 mb-4">Likes del vídeo: {counter}</h2>
-
-        <button
-          className="bg-green-700 text-white py-1 px-3 mx-1 rounded"
-          onClick={() => setCounter(counter + 1)}
-        >
-          Aumentar
-        </button>
-
-        <button
-          className="bg-red-700 text-white py-1 px-3 mx-1 rounded"
-          onClick={handleReset}
-        >
-          Resetar
-        </button>
-
-        <button
-          className="bg-blue-700 text-white py-1 px-3 rounded"
-          onClick={() => {
-            setCounter(counter - 1);
-          }}
-        >
-          Disminuir
-        </button>
-      </div>
-    </>
+    <div style={styles}>
+      <h1>Modo {isDarkMode ? 'Oscuro ' : 'Claro '}</h1>
+      <button onClick={toggleTheme}>
+        Activar modo {isDarkMode ? 'claro' : 'oscuro'}
+      </button>
+    </div>
   );
-};
+}
 
-export default Segundo;
+export default ThemeToggle;
