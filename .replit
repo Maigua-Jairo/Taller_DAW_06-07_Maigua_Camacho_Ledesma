@@ -38,7 +38,19 @@ args = "npm install -D postcss autoprefixer"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
+args = "npm install gh-pages --save-dev"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
 args = "npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "git config --global user.email \"jairo.maigua@epn.edu.ec\""
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "git config --global user.name \"Maigua-Jairo\""
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
