@@ -6,56 +6,54 @@
 */
 
 import { useState } from "react"
-import { useFetch } from "../customHook/useFecth"
+import { useFetch } from "../customHook/useFetch"
 
 const Cuarto = () => {
-  
-  const [products, setProducts] = useState([])
-  const [memes, setMemes] = useState([])
-  
+  const [pokemon, setPokemon] = useState(null)
+  const [character, setCharacter] = useState(null)
   const fetchDataBackend = useFetch()
 
-  const getDataProducts = async()=>{
-    const products = await fetchDataBackend("https://fakestoreapi.com/products")
-    setProducts(products)
-    console.log(products)  
-  }
-  
-  const getDataMemes = async()=>{
-    const memes = await fetchDataBackend("https://api.imgflip.com/get_memes")
-    setMemes(memes)
-    console.log(memes)  
+  const getPokemon = async () => {
+    const randomId = Math.floor(Math.random() * 1025) + 1
+    const data = await fetchDataBackend(`https://pokeapi.co/api/v2/pokemon/${randomId}`)
+    setPokemon(data)
   }
 
-
+  const getCharacter = async () => {
   
+    const randomId = Math.floor(Math.random() * 826) + 1
+    const data = await fetchDataBackend(`https://rickandmortyapi.com/api/character/${randomId}`)
+    setCharacter(data)
+  }
+
   return (
     <>
       <h1 className="font-bold text-2xl">customHook</h1>
-
       <hr className="border-gray-400 mb-8"/>
-
-      <ul className="list-disc pl-5">
-        <li>
-          Es un Hook que permite encapsular lógica reutilizable y que puede ser utilizado en cualquier componente.
-        </li>
-      </ul>
-
       <div className="flex justify-center mb-8 mt-8">
+        <div className="border rounded-lg p-4 w-96 text-center bg-white shadow">
+          <h2 className="text-lg font-semibold mb-4 underline">Datos del Backend</h2>
 
-        <div className="w-120 border rounded-lg p-4 w-80 text-center">
+          <div className="text-left mb-4 bg-blue-50 p-2 rounded border border-blue-200">
+            <p className="font-bold text-blue-700">Pokémon:</p>
+            <pre className="text-sm">{pokemon ? pokemon.name : "Presiona el botón..."}</pre>
+          </div>
 
-          <h2 className="text-lg font-semibold mb-2 underline">Más información</h2>
-          <p className="mb-3 text-left mb-4"></p>
-          <pre>{JSON.stringify(products[3]?.title)}</pre>
-          <pre>{JSON.stringify(memes.data?.memes[0]?.name)}</pre>
-          
-          <button className="bg-violet-700 text-white py-1 px-3 mx-1 rounded mt-4" onClick={getDataProducts}>Obtener Productos</button>
-          <button className="bg-violet-700 text-white py-1 px-3 rounded" onClick={getDataMemes}>Obtener Memes</button>
+          <div className="text-left mb-4 bg-green-50 p-2 rounded border border-green-200">
+            <p className="font-bold text-green-700">Personaje:</p>
+            <pre className="text-sm">{character ? character.name : "Presiona el botón..."}</pre>
+          </div>
+
+          <div className="flex gap-2 justify-center">
+            <button className="bg-blue-600 text-white py-1 px-3 rounded hover:bg-blue-800" onClick={getPokemon}>
+              Pokémon aleatorio
+            </button>
+            <button className="bg-green-600 text-white py-1 px-3 rounded hover:bg-green-800" onClick={getCharacter}>
+              Personaje aleatorio
+            </button>
+          </div>
         </div>
-
       </div>
-
     </>
   )
 }
