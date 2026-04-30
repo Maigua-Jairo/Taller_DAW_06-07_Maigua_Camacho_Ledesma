@@ -21,7 +21,7 @@ const Segundo = () => {
 
       <ul className="list-disc pl-5">
         <li>
-          Es un Hook que permite manejar el estado dentro de un componente.
+        Esta es una prueba para comprobar los cambios en github
         </li>
       </ul>
 
